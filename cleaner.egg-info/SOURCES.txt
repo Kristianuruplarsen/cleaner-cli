@@ -1,8 +1,0 @@
-cleaner.egg-info/PKG-INFO
-cleaner.egg-info/SOURCES.txt
-cleaner.egg-info/dependency_links.txt
-cleaner.egg-info/entry_points.txt
-cleaner.egg-info/top_level.txt
-cleaner_cli/__init__.py
-cleaner_cli/__main__.py
-cleaner_cli/clean.py
