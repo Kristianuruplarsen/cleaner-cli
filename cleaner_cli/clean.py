@@ -18,13 +18,13 @@ def clean():
     folder = os.getcwd()
     # parser for cli options
     p = optparse.OptionParser()
-    p.add_option('--filetypes', '-f', default = 'pdf,txt')
+    p.add_option('--filetypes', '-f', default = 'pdf')
     options, arguments = p.parse_args()
 
     #    if not os.path.exists(folder):
     #        raise ValueError('Folder does not exist.')
     filetypes = options.filetypes.split(',')
-    print(filetypes)
+
     for ft in filetypes:
         files = list_files(ft)
         if len(files)>0:
