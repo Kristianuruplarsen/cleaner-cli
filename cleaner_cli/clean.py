@@ -15,10 +15,12 @@ def list_files(filetype):
 def clean():
     """ move all files with filetype ft to a subfolder named as ft
     """
+    ext_helper = lambda x: os.path.splitext(os.path.basename(x))[0]
     folder = os.getcwd()
     # parser for cli options
     p = optparse.OptionParser()
     p.add_option('--filetypes', '-f', default = 'pdf')
+    p.add_option('--exemptions', '-x', default = None)
     options, arguments = p.parse_args()
 
     #    if not os.path.exists(folder):
@@ -34,13 +36,18 @@ def clean():
             # move each file from folder to folder/`ft`
             for f in files:
                 filename = os.path.basename(f)
-                if not os.path.exists(join(folder, ft, filename)):
-                    os.rename(f, join(folder, ft, filename))
-                else:
-                    # if a file already existed, should it be replaced?
-                    user_response = input('File {f} already exists in folder. Overwrite? [Y/n]'.format(f = filename))
-                    if user_response == 'Y':
-                        os.remove(join(folder, ft, filename))
+                # if the file is not exempt
+                if ext_helper(filename) not in options.exemptions.split(','):
+                    if not os.path.exists(join(folder, ft, filename)):
                         os.rename(f, join(folder, ft, filename))
                     else:
-                        pass
+                        # if a file already existed, should it be replaced?
+                        user_response = input('File {f} already exists in folder. Overwrite? [Y/n]'.format(f = filename))
+                        if user_response == 'Y':
+                            os.remove(join(folder, ft, filename))
+                            os.rename(f, join(folder, ft, filename))
+                        else:
+                            pass
+                else:
+                    pass
+    print("Files of types {fts} have been organized in folders.".format(fts = options.filetypes))
