@@ -1,5 +1,10 @@
 # cleaner-cli
-A command line interface that keeps your otherwise messy desktop presentable. Installations should be as simple as forking or downloading and then
+A command line interface that keeps your otherwise messy desktop presentable. Installations should be as simple as running
+
+```
+pip install git+https://github.com/Kristianuruplarsen/cleaner-cli
+```
+Or you can fork or download the repo and then run
 
 ```
 pip install "path/to/your/local/repo"
