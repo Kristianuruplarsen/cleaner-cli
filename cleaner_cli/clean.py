@@ -1,8 +1,8 @@
 import glob
 import os
+import sys
 import optparse
 from os.path import join, basename, exists, splitext
-
 
 # def list_files(filetype):
 #     """ List files of a particular type in the specified folder.
@@ -15,12 +15,19 @@ def clean():
     """ move all files with filetype ft to a subfolder named as ft
     """
     folder = os.getcwd()
+    required = ['filetypes']
     # parser for cli options
     p = optparse.OptionParser()
-    p.add_option('--filetypes', '-f', default = 'pdf')
-    p.add_option('--exemptions', '-x', default = '')
+    p.add_option('--filetypes', '-f',
+    help = 'File extentions to clean')
+    p.add_option('--exemptions', '-x',
+    help = 'File names exempt from cleaning')
     options, arguments = p.parse_args()
 
+    for r in required:
+        if options.__dict__[r] is None:
+            p.print_help()
+            sys.exit()
     #    if not os.path.exists(folder):
     #        raise ValueError('Folder does not exist.')
     filetypes = options.filetypes.split(',')
